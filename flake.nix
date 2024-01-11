@@ -9,7 +9,7 @@
     pkgs = nixpkgs.legacyPackages."${system}";
     tex = pkgs.texlive.combine {
       inherit (pkgs.texlive) scheme-small latex-bin latexmk
-      tools fontspec;
+      tools fontspec geometry;
     };
   in
   rec {
