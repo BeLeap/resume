@@ -8,8 +8,8 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages."${system}";
     tex = pkgs.texlive.combine {
-      inherit (pkgs.texlive) scheme-small latex-bin latexmk
-      tools fontspec geometry titling;
+      inherit (pkgs.texlive) scheme-full latex-bin latexmk
+      tools;
     };
   in
   rec {
@@ -17,7 +17,7 @@
       pdf = pkgs.stdenvNoCC.mkDerivation rec {
         name = "cv-pdf";
         src = self;
-        buildInputs = [ pkgs.coreutils pkgs.pretendard tex ];
+        buildInputs = [ pkgs.coreutils pkgs.ibm-plex tex ];
         phases = ["unpackPhase" "buildPhase" "installPhase"];
         buildPhase = ''
           export PATH="${pkgs.lib.makeBinPath buildInputs}"
@@ -25,7 +25,7 @@
           mkdir -p $TEMPDIR/.texcache/texmf-var
           env TEXMFHOME="$TEMPDIR/.texcache" \
             TEXMFVAR="$TEMPDIR/.texcache/texmf-var" \
-            OSFONTDIR=${pkgs.pretendard}/share/fonts \
+            OSFONTDIR=${pkgs.ibm-plex}/share/fonts \
             latexmk -interaction=nonstopmode -pdf -lualatex \
             cv.tex
         '';

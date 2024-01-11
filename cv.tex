@@ -1,10 +1,12 @@
 \documentclass[12pt]{article}
 
 \usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
 
 \usepackage{fontspec}
-\setmainfont{Pretendard}
-\setsansfont{Pretendard}
+\setmainfont{IBM Plex Sans KR}
 
 \usepackage{geometry}
 \geometry{
@@ -15,20 +17,127 @@
 
 \pagestyle{empty}
 
-\usepackage{titling}
-\predate{}
-\postdate{}
+%% MACROS %%
 
-\title{장창서 \\
-  \large DevOps Engineer}
-\date{}
+% size of the boxes used to align text
+\newlength{\spacebox}
+\settowidth{\spacebox}{123456789}
+\newcommand{\sepspace}{\vspace*{1em}}				% Vertical space macro
+
+% name
+\newcommand{\name}[1]{
+\Huge % font size
+% print name centered and bold
+\begin{center} \textbf{#1} \end{center}\par
+% back to normal size and font
+\normalsize\normalfont}
+
+% motto
+\newcommand{\jobtitle}[1]{
+  \large % font size
+% print motto centered and slanted
+  \begin{center} \textsl{#1}\end{center}\par
+% back to normal size and font
+  \normalsize \normalfont}
+
+% personal information
+\newcommand{\info}[2]{
+% set specific indentation for personal information
+  \noindent\hangindent=2em\hangafter=0
+% create a box to align two pieces of text
+  \parbox{\spacebox}{%
+  \textsl{#1}} % slanted entry name
+  #2 \par} % entry value
+
+% skill
+\newcommand{\skill}[2]{
+% set specific indentation for personal information
+\noindent\hangindent=2em\hangafter=0
+% create a box to align two pieces of text
+\parbox{3\spacebox}{% three times larger box
+\textsc{#1}} % small caps entry name
+#2 \par} % entry value
+
+% language level
+\newcommand{\lan}[2]{
+    % set specific indentation for personal information
+    \noindent\hangindent=2em\hangafter=0
+    % create a box to align two pieces of text
+    \parbox{\spacebox}{%
+        \textbf{#1}} % bold font entry name
+     #2 \par}    % entry value
+
+% education entry
+\newcommand{\education}[4]{
+
+% name of the studies
+  \noindent  \textbf{#1}
+  % at the right the duration
+    \hfill 
+    \framebox{% duration inside a frame box
+    \parbox{6em}{%
+    \centering\textbf{#2}}} \par
+ % new paragraph with the school in italics
+     \noindent \textit{#3} \par
+     % description with no hanging and in smaller text
+     \vspace*{0.5em}
+     \noindent\hangindent=2em\hangafter=0 \small #4 
+%back to normal size
+\normalsize \par}
+
+% work experience
+
+\newcommand{\work}[4]{
+% name of the work
+  \noindent  \textbf{#1}
+% at the right the duration
+  \hfill 
+\framebox{% duration inside a frame box
+  \parbox{6em}{%
+  \centering\textbf{#2}}} \par
+% new paragraph with the school in italics
+  \noindent \textit{#3} \par
+% description with no hanging and in smaller text
+  \vspace*{0.5em}
+  \noindent\hangindent=2em\hangafter=0 \small #4 
+%back to normal size
+\normalsize \par}
 
 \begin{document}
-\maketitle
+\name{장창서}
+\vspace*{-10pt}
+\jobtitle{DevOps Engineer}
 
-\begin{tabular}{l|l}
-  Email: & beleap@beleap.dev\\
-  Phone: & 010 9439 4941\\
-  GitHub: & \href{https://github.com/BeLeap}{BeLeap}
-\end{tabular}
+\sepspace
+\info{Email}{\texttt{beleap@beleap.dev}}
+\info{Phone}{010 9439 4941}
+\info{GitHub}{\href{https://github.com/BeLeap}{BeLeap}}
+
+\section*{Work Experience}
+
+\work{DevOps Engineer}{2022.08 -}{Riiid}{
+  \begin{itemize}
+    \item AWS EKS
+    \item On-Premise GPU Kubernetes Cluster 운영
+  \end{itemize}
+}
+\sepspace
+
+\work{Brain/Dev}{2021.12 - 2022.08}{마인즈랩}{TTS 서버 리팩토링}
+\sepspace
+
+\work{Software Engineer}{2021.10 - 2021.12}{Nearthlab}{드론 이미지 처리 기능 개발
+  \begin{itemize}
+    \item JavaScript
+    \item AWS Lambda
+  \end{itemize}
+}
+\sepspace
+
+\work{Backend Engineer}{2021.06 - 2021.10}{Riiid}{RB2A(Airmath) 도메인 서버 개발
+  \begin{itemize}
+    \item Spring Boot
+    \item Kotlin
+  \end{itemize}
+}
 \end{document}
