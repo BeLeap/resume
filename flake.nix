@@ -2,14 +2,14 @@
   description = "CV";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = { self, nixpkgs, flake-utils }: 
-  with flake-utils.lib; eachSystem allSystems (system:
+  outputs = { self, nixpkgs }: 
   let
-    pkgs = nixpkgs.legacyPackages.${system};
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages."${system}";
     tex = pkgs.texlive.combine {
-      inherit (pkgs.texlive) scheme-minimal latex-bin latexmk;
+      inherit (pkgs.texlive) scheme-small latex-bin latexmk
+      tools fontspec;
     };
   in
   rec {
@@ -17,12 +17,15 @@
       pdf = pkgs.stdenvNoCC.mkDerivation rec {
         name = "cv-pdf";
         src = self;
-        buildInputs = [ pkgs.coreutils tex ];
+        buildInputs = [ pkgs.coreutils pkgs.pretendard tex ];
         phases = ["unpackPhase" "buildPhase" "installPhase"];
         buildPhase = ''
-          export PATH="${pkgs.lib.makeBinPath buildInputs}";
-          mkdir -p .cache/texmf-var
-          env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
+          export PATH="${pkgs.lib.makeBinPath buildInputs}"
+          export TEMPDIR=$(mktemp -d)
+          mkdir -p $TEMPDIR/.texcache/texmf-var
+          env TEXMFHOME="$TEMPDIR/.texcache" \
+            TEXMFVAR="$TEMPDIR/.texcache/texmf-var" \
+            OSFONTDIR=${pkgs.pretendard}/share/fonts \
             latexmk -interaction=nonstopmode -pdf -lualatex \
             cv.tex
         '';
@@ -32,6 +35,9 @@
         '';
       };
     };
-    defaultPackage = packages.pdf;
-  });
+    defaultPackage."${system}" = packages.pdf;
+    devShells = pkgs.mkShell {
+      buildInputs = packages.pdf.buildInputs;
+    };
+  };
 }
