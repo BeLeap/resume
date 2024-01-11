@@ -49,24 +49,6 @@
   \textsl{#1}} % slanted entry name
   #2 \par} % entry value
 
-% skill
-\newcommand{\skill}[2]{
-% set specific indentation for personal information
-\noindent\hangindent=2em\hangafter=0
-% create a box to align two pieces of text
-\parbox{3\spacebox}{% three times larger box
-\textsc{#1}} % small caps entry name
-#2 \par} % entry value
-
-% language level
-\newcommand{\lan}[2]{
-    % set specific indentation for personal information
-    \noindent\hangindent=2em\hangafter=0
-    % create a box to align two pieces of text
-    \parbox{\spacebox}{%
-        \textbf{#1}} % bold font entry name
-     #2 \par}    % entry value
-
 % education entry
 \newcommand{\education}[4]{
 
@@ -140,4 +122,8 @@
     \item Kotlin
   \end{itemize}
 }
+
+\section*{Education}
+
+\education{컴퓨터학과 학사}{2019.03 - }{고려대학교}{}
 \end{document}
