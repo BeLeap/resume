@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage{hyperref}
 \usepackage{blindtext}
@@ -18,6 +18,7 @@
 \pagestyle{empty}
 
 \setlength\parindent{0pt}
+\setlength\hangindent{0pt}
 
 %% MACROS %%
 
@@ -112,7 +113,16 @@
 
 \section*{Work Experience}
 
-\work{DevOps Engineer}{2022.08 -}{Riiid}{
+\work{DevOps Engineer}{2022.08 -}{Riiid}{주요 업무
+  \begin{itemize}
+    \item ArgoCD Sync Unkown 에러 메시지 해결
+    \item Azure 초기 구조 설계 및 작업
+    \item Keycloak과 AssumeRole을 활용한 사용하기 편리한 multi-account AWS 인증 환경 구축
+    \item On-Premise GPU Kubernetes Cluster 운영
+    \item Santa Toeic, Airmath 신규 인프라 이전
+  \end{itemize}
+  \sepspace
+  기술 스택
   \begin{itemize}
     \item AWS, Azure
     \item Kubernetes + Istio + Helm + ArgoCD
@@ -123,25 +133,41 @@
 }
 \sepspace
 
-\work{Brain/Dev}{2021.12 - 2022.08}{마인즈랩}{TTS 서버 리팩토링
-  \newline Java, 동기 방식으로 작성된 TTS 서버를 Kotlin, Coroutine으로 재작성
+\work{Brain/Dev}{2021.12 - 2022.08}{마인즈랩}{주요 업무
   \begin{itemize}
-    \item Spring Boot
+    \item Java 언어를 사용하여 동기 방식으로 작성된 TTS 서버를 Kotlin 언어를 사용하여 비동기 방식으로 재작성
+  \end{itemize}
+  \sepspace
+  기술 스택
+  \begin{itemize}
     \item Kotlin
+    \item Spring Boot
     \item gRPC
   \end{itemize}
 }
 \sepspace
 
-\work{Software Engineer}{2021.10 - 2021.12}{Nearthlab}{풍력발전기 점검 사진 배치 처리 기능 개발
+\work{Software Engineer}{2021.10 - 2021.12}{Nearthlab}{주요 업무
+  \begin{itemize}
+    \item 풍력발전기 점검 사진 배치 처리 기능 개발
+  \end{itemize}
+  \sepspace
+  기술 스택
   \begin{itemize}
     \item TypeScript
     \item AWS Lambda
+    \item NestJS
+    \item Vercel
   \end{itemize}
 }
 \sepspace
 
-\work{Backend Engineer}{2021.06 - 2021.10}{Riiid}{RB2A(Airmath) 도메인 서버 개발
+\work{Backend Engineer}{2021.06 - 2021.10}{Riiid}{주요 업무
+  \begin{itemize}
+    \item RB2A(Airmath) 도메인 서버 개발
+  \end{itemize}
+  \sepspace
+  기술 스택
   \begin{itemize}
     \item Spring Boot
     \item Kotlin
