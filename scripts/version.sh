@@ -40,6 +40,15 @@ fi
 yearweek="${year:2:2}${weeknumber}"
 # endregion making yearweek
 
+last_version=$(git tag | tac | head -n 1)
+last_yearweek=$(echo $last_version | cut -d '.' -f 2)
+
+if [[ $last_yearweek -eq $yearweek ]]; then
+  last_build=$(echo $last_version | cut -d '.' -f 3)
+  build=$(expr $last_build + 1)
+else
+  build="0"
+fi
 
 if [ -z ${override_version} ]; then
     # By default, version is set to 0.
@@ -48,11 +57,6 @@ if [ -z ${override_version} ]; then
         >&2 echo "- Warning: no head value. set to 0 by default."
     fi
  
-    # By default, build is set to 0.
-    if [ -z ${build} ]; then
-        build="0"
-        >&2 echo "- Warning: no build value. set to 0 by default."
-    fi
     version="$head.$yearweek.$build"
 else
     >&2 echo "- Warning: head, build, suffix values will be ignored"
