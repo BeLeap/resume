@@ -15,4 +15,4 @@ jobs:
       - run: nix build
       - uses: softprops/action-gh-release@v1
         with:
-          files: result/cv.pdf
+          files: result/resume.pdf
