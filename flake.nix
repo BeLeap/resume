@@ -1,5 +1,5 @@
 {
-  description = "CV";
+  description = "BeLeap Resume";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
@@ -15,7 +15,7 @@
     rec {
       packages = {
         pdf = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "cv-pdf";
+          name = "resume-pdf";
           src = self;
           buildInputs = [ pkgs.coreutils pkgs.ibm-plex tex ];
           phases = [ "unpackPhase" "buildPhase" "installPhase" ];
@@ -27,11 +27,11 @@
               TEXMFVAR="$TEMPDIR/.texcache/texmf-var" \
               OSFONTDIR=${pkgs.ibm-plex}/share/fonts \
               latexmk -interaction=nonstopmode -pdf -lualatex \
-              cv.tex
+              resume.tex
           '';
           installPhase = ''
             mkdir -p $out
-            cp cv.pdf $out/
+            cp resume.pdf $out/
           '';
         };
       };
