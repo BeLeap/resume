@@ -1,0 +1,205 @@
+\documentclass[10pt]{article}
+
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{fontspec}
+\setmainfont{IBM Plex Sans KR}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=20mm,
+  top=15mm,
+}
+
+\pagestyle{empty}
+
+\setlength\parindent{0pt}
+\setlength\hangindent{0pt}
+
+%% MACROS %%
+
+% size of the boxes used to align text
+\newlength{\spacebox}
+\settowidth{\spacebox}{123456789}
+\newcommand{\sepspace}{\vspace*{1em}}				% Vertical space macro
+
+% name
+\newcommand{\name}[1]{
+\Huge % font size
+% print name centered and bold
+\begin{center} \textbf{#1} \end{center}\par
+% back to normal size and font
+\normalsize\normalfont}
+
+% jobtitl
+\newcommand{\jobtitle}[1]{
+  \large % font size
+% print jobtitle centered and slanted
+  \begin{center} \textsl{#1}\end{center}\par
+% back to normal size and font
+  \normalsize \normalfont}
+
+% personal information
+\newcommand{\info}[2]{
+% set specific indentation for personal information
+  \noindent\hangindent=2em\hangafter=0
+% create a box to align two pieces of text
+  \parbox{\spacebox}{%
+  \textsl{#1}} % slanted entry name
+  #2 \par} % entry value
+
+% education entry
+\newcommand{\education}[4]{
+
+% name of the studies
+  \noindent  \textbf{#1}
+  % at the right the duration
+    \hfill 
+    \framebox{% duration inside a frame box
+    \parbox{6em}{%
+    \centering\textbf{#2}}} \par
+ % new paragraph with the school in italics
+     \noindent \textit{#3} \par
+     % description with no hanging and in smaller text
+     \vspace*{0.5em}
+     \noindent\hangindent=2em\hangafter=0 \small #4 
+%back to normal size
+\normalsize \par}
+
+% work experience
+
+\newcommand{\work}[4]{
+% name of the work
+  \noindent  \textbf{#1}
+% at the right the duration
+  \hfill 
+\framebox{% duration inside a frame box
+  \parbox{6em}{%
+  \centering\textbf{#2}}} \par
+% new paragraph with the school in italics
+  \noindent \textit{#3} \par
+% description with no hanging and in smaller text
+  \vspace*{0.5em}
+  \noindent\hangindent=2em\hangafter=0 \small #4 
+%back to normal size
+\normalsize \par}
+
+\begin{document}
+\name{장창서}
+\vspace*{-10pt}
+\jobtitle{DevOps Engineer}
+
+\sepspace
+\info{Email}{\texttt{beleap@beleap.dev}}
+\info{Phone}{010 9439 4941}
+\info{GitHub}{\href{https://github.com/BeLeap}{BeLeap}}
+
+\section*{About Me}
+
+안녕하세요. DevOps Engineer 장창서입니다.
+
+저는 이런 사람입니다.
+
+\begin{itemize}
+  \item 자동화를 좋아합니다.
+  \item 토론을 통해 모두가 만족하는 결론을 내는 것을 좋아합니다.
+  \item 다양한 기술을 좋아합니다.
+  \item 새로운 것을 시도하고 배우는 것에 적극적입니다.
+\end{itemize}
+
+\section*{Work Experience}
+
+\work{DevOps Engineer}{2024.03}{Viva Republica}{주요 업무
+  \begin{itemize}
+    \item On-Premise Kubernetes Cluster 운영
+    \item 내부 DevOps 시스템 개발
+    \item 내부 ZTNA 개발
+  \end{itemize}
+}
+
+\work{DevOps Engineer}{2022.08 - 2024.02}{Riiid}{주요 업무
+  \begin{itemize}
+    \item ArgoCD Sync Unkown 에러 메시지 원인 분석 및 해결
+    \item Azure 초기 구조 설계 및 작업
+    \item Keycloak과 AssumeRole을 활용한 사용하기 편리한 multi-account AWS 인증 환경 구축
+    \item On-Premise GPU Kubernetes Cluster 운영
+    \item Santa Toeic, Airmath 신규 인프라 이전
+  \end{itemize}
+  \sepspace
+  기술 스택
+  \begin{itemize}
+    \item AWS, Azure
+    \item Kubernetes + Istio + Helm + ArgoCD
+    \item On-Premise GPU Kubernetes Cluster (Kubespray, Ansible)
+    \item Terraform
+    \item Datadog
+  \end{itemize}
+}
+\sepspace
+
+\work{Brain/Dev}{2021.12 - 2022.08}{마인즈랩}{주요 업무
+  \begin{itemize}
+    \item Java 언어를 사용하여 동기 방식으로 작성된 TTS 서버를 Kotlin 언어를 사용하여 비동기 방식으로 재작성
+  \end{itemize}
+  \sepspace
+  기술 스택
+  \begin{itemize}
+    \item Kotlin
+    \item Spring Boot
+    \item gRPC
+  \end{itemize}
+}
+\sepspace
+
+\work{Software Engineer}{2021.10 - 2021.12}{Nearthlab}{주요 업무
+  \begin{itemize}
+    \item 풍력발전기 점검 사진 배치 처리 기능 개발
+  \end{itemize}
+  \sepspace
+  기술 스택
+  \begin{itemize}
+    \item TypeScript
+    \item AWS Lambda
+    \item NestJS
+    \item Vercel
+  \end{itemize}
+}
+\sepspace
+
+\work{Backend Engineer}{2021.06 - 2021.10}{Riiid}{주요 업무
+  \begin{itemize}
+    \item RB2A(Airmath) 도메인 서버 개발
+  \end{itemize}
+  \sepspace
+  기술 스택
+  \begin{itemize}
+    \item Spring Boot
+    \item Kotlin
+    \item PostgreSQL
+    \item gRPC
+  \end{itemize}
+}
+
+\section*{Side Project}
+
+\work{Backend}{2020.01 -}{KLUE}{KLUE 백엔드 서버 개발
+  \begin{itemize}
+    \item Express
+    \item NestJS
+    \item TypeScript
+    \item AWS ECS
+    \item MariaDB
+  \end{itemize}
+
+  참고: \href{https://klue.kr}{KLUE}는 고려대학교 학생들을 대상으로 서비스하고 있는 강의평가 공유 서비스입니다.
+}
+
+\sepspace
+\section*{Education}
+
+\education{컴퓨터학과 학사}{2019.03 - }{고려대학교}{}
+\end{document}
