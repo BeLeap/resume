@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      HEADVER_HEAD: 1
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Compute HeadVer version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          yearweek="$(date -u +'%g%V')"
+          version="v${HEADVER_HEAD}.${yearweek}.${GITHUB_RUN_NUMBER}"
+
+          printf 'value=%s\n' "$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build with Nix
+        run: nix build
+
+      - name: Locate build artifact
+        id: artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          artifact="$(find -L result -maxdepth 2 -type f -name '*.pdf' | head -n 1)"
+          if [[ -z "${artifact}" ]]; then
+            echo "Expected a PDF in the nix build result, but none was found." >&2
+            exit 1
+          fi
+
+          printf 'path=%s\n' "$artifact" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.value }}
+          ARTIFACT: ${{ steps.artifact.outputs.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          gh release create "$VERSION" \
+            "$ARTIFACT" \
+            --target "$GITHUB_SHA" \
+            --title "$VERSION" \
+            --generate-notes
