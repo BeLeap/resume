@@ -42,19 +42,14 @@ jobs:
       - name: Build with Nix
         run: nix build
 
-      - name: Locate build artifact
+      - name: Tidy build artifact
         id: artifact
         shell: bash
         run: |
           set -euo pipefail
 
-          artifact="$(find -L result -maxdepth 2 -type f -name '*.pdf' | head -n 1)"
-          if [[ -z "${artifact}" ]]; then
-            echo "Expected a PDF in the nix build result, but none was found." >&2
-            exit 1
-          fi
-
-          printf 'path=%s\n' "$artifact" >> "$GITHUB_OUTPUT"
+          cp result resume.pdf
+          echo 'path=resume.pdf' >> "$GITHUB_OUTPUT"
 
       - name: Publish GitHub release
         env:
