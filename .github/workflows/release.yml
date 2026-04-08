@@ -16,6 +16,9 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
     env:
       HEADVER_HEAD: 1
     steps:
