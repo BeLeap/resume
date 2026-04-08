@@ -1,44 +1,49 @@
 {
-  description = "BeLeap Resume";
+  description = "Typst flake template";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+
+    press.url = "github:RossSmyth/press";
+    typst-live.url = "github:ItsEthra/typst-live";
+
+    beleap-overlay.url = "github:BeLeap/nix-overlay";
   };
-  outputs = { self, nixpkgs }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages."${system}";
-      tex = pkgs.texlive.combine {
-        inherit (pkgs.texlive) scheme-full latex-bin latexmk
-          tools;
-      };
-    in
-    rec {
-      packages = {
-        pdf = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "resume-pdf";
-          src = self;
-          buildInputs = [ pkgs.coreutils pkgs.ibm-plex tex ];
-          phases = [ "unpackPhase" "buildPhase" "installPhase" ];
-          buildPhase = ''
-            export PATH="${pkgs.lib.makeBinPath buildInputs}"
-            export TEMPDIR=$(mktemp -d)
-            mkdir -p $TEMPDIR/.texcache/texmf-var
-            env TEXMFHOME="$TEMPDIR/.texcache" \
-              TEXMFVAR="$TEMPDIR/.texcache/texmf-var" \
-              OSFONTDIR=${pkgs.ibm-plex}/share/fonts \
-              latexmk -interaction=nonstopmode -pdf -lualatex \
-              resume.tex
-          '';
-          installPhase = ''
-            mkdir -p $out
-            cp resume.pdf $out/
-          '';
+
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    press,
+    typst-live,
+    beleap-overlay,
+  }:
+    flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (import press)
+            (import beleap-overlay)
+          ];
         };
-      };
-      defaultPackage."${system}" = packages.pdf;
-      formatter."${system}" = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      devShells = pkgs.mkShell {
-        buildInputs = packages.pdf.buildInputs;
-      };
-    };
+      in rec {
+        packages.default = pkgs.buildTypstDocument {
+          name = "main";
+          src = ./.;
+          fonts = with pkgs; [
+            nanum-myeongjo
+          ];
+        };
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [packages.default];
+          packages = with pkgs; [
+            tinymist
+            typstyle
+            (typst-live.packages.${system}.default)
+          ];
+        };
+      }
+    );
 }
