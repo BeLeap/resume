@@ -87,6 +87,15 @@
     - On-Premise Kubernetes Cluster 운영
     - 내부 DevOps 시스템 개발
     - 내부 ZTNA 개발
+
+    #v(0.6em)
+    사용한 기술
+
+    - Kubernetes
+    - Ceph
+    - Istio
+    - Thanos
+    - Go
   ],
 )
 
