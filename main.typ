@@ -106,7 +106,7 @@
     - Santa Toeic, Airmath 신규 인프라 이전
 
     #v(0.6em)
-    기술 스택
+    사용한 기술
 
     - AWS, Azure
     - Kubernetes + Istio + Helm + ArgoCD
@@ -128,7 +128,7 @@
     - Java 언어를 사용하여 동기 방식으로 작성된 TTS 서버를 Kotlin 언어를 사용하여 비동기 방식으로 재작성
 
     #v(0.6em)
-    기술 스택
+    사용한 기술
 
     - Kotlin
     - Spring Boot
@@ -148,7 +148,7 @@
     - 풍력발전기 점검 사진 배치 처리 기능 개발
 
     #v(0.6em)
-    기술 스택
+    사용한 기술
 
     - TypeScript
     - AWS Lambda
@@ -169,7 +169,7 @@
     - RB2A(Airmath) 도메인 서버 개발
 
     #v(0.6em)
-    기술 스택
+    사용한 기술
 
     - Spring Boot
     - Kotlin
