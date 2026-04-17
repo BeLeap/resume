@@ -55,8 +55,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          cp result resume.pdf
-          echo 'path=resume.pdf' >> "$GITHUB_OUTPUT"
+          cp result ChangseoJang_Resume.pdf
+          echo 'path=ChangseoJang_Resume.pdf' >> "$GITHUB_OUTPUT"
 
       - name: Publish GitHub release
         env:
