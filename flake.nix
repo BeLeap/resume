@@ -1,5 +1,5 @@
 {
-  description = "Typst flake template";
+  description = "ChangseoJang_Resume";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
