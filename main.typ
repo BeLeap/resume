@@ -73,7 +73,7 @@
 
 = About Me
 
-안녕하세요. DevOps Engineer 장창서입니다.
+On-premise Kubernetes 운영과 플랫폼 개발을 해왔습니다. 서비스와 개발 조직에 필요한 인프라, 자동화, 운영 도구를 만들고 개선해왔습니다. 문제의 근본 원인을 파악하고, 장기적으로 유지 가능한 해결책을 설계하는 방식을 지향합니다.
 
 = Work Experience
 
