@@ -79,7 +79,7 @@
 
 #experience(
   [DevOps Engineer],
-  [2024.03 - ],
+  [2024.03 - 현재],
   [Viva Republica],
   [
     주요 업무
@@ -191,7 +191,7 @@
 
 #experience(
   [Backend],
-  [2020.01 -],
+  [2020.01 - 현재],
   [KLUE],
   [
     KLUE 백엔드 서버 개발
