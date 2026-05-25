@@ -7,6 +7,11 @@
     left: 20mm,
   ),
 )
+#set document(
+  title: "장창서",
+  author: "장창서",
+  date: none,
+)
 
 #set text(font: "NanumMyeongjo", size: 10pt)
 #set par(justify: false, leading: 0.7em)
