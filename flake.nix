@@ -6,7 +6,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     press.url = "github:RossSmyth/press";
-    typst-live.url = "github:ItsEthra/typst-live";
+    typst-live.url = "github:ItsEthra/typst-live?ref=v0.7.0";
 
     beleap-overlay.url = "github:BeLeap/nix-overlay";
   };
@@ -25,12 +25,13 @@
           inherit system;
           overlays = [
             (import press)
-            (import beleap-overlay)
+            beleap-overlay.overlays.default
           ];
         };
       in rec {
         packages.default = pkgs.buildTypstDocument {
-          name = "main";
+          pname = "main";
+          version = "0.0.0";
           src = ./.;
           fonts = with pkgs; [
             nanum-myeongjo
