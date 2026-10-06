@@ -8,7 +8,7 @@
   ),
 )
 #set document(
-  title: "장창서",
+  title: "장창서 이력서",
   author: "장창서",
   date: none,
 )
