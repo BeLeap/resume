@@ -13,7 +13,7 @@
   date: none,
 )
 
-#set text(font: "NanumMyeongjo", size: 10pt)
+#set text(font: "NanumMyeongjo", size: 10pt, lang: "ko")
 #set par(justify: false, leading: 0.7em)
 #show link: set text(fill: blue)
 #show heading.where(level: 1): set text(size: 13pt, weight: "bold")
